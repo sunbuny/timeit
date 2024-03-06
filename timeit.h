@@ -17,8 +17,12 @@
          std::chrono::duration<double, std::milli>(COMBINE(timeit_end,line_num) - COMBINE(timeit_start,line_num));     \
     std::cout << msg << " execution time: " <<  COMBINE(timeit_duration, line_num).count() << " ms"<< std::endl;
 
+#ifndef DISABLE_TIMEIT
 // use __COUNTER__ instead of __LINE__ to make the TIMEIT marco able to be nested
 #define TIMEIT(msg,  ...) \
      TIMEIT_PRINT_HELPER(msg, __COUNTER__,  __VA_ARGS__)
+#else
+#define TIMEIT(msg, ...) __VA_ARGS__
+#endif
 
 
